@@ -17,4 +17,11 @@ bazel-bin/mediapipe/examples/desktop/multi_hand_tracking/multi_hand_tracking_gpu
 >>>build.py
 python build.py --input_data_path="/home/pi/mediapipe/Input_Video/" --output_data_path="/home/pi/mediapipe/Output_Data/"
 
+>>>delete log!!
+du -sh /var/log/*				#check log size
+sudo sh -c 'cat /dev/null > /var/log/messages'	#delete log
+
+>>>check cpu temperature
+vcgencmd measure_temp
+
 #.avi -> omxplayer
