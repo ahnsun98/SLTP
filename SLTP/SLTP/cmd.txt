@@ -21,6 +21,16 @@ python build.py --input_data_path="/home/pi/mediapipe/Input_Video/" --output_dat
 du -sh /var/log/*				#check log size
 sudo sh -c 'cat /dev/null > /var/log/messages'	#delete log
 
+#install tensorflow & keras
+https://raspberrypi.stackexchange.com/questions/107483/error-installing-tensorflow-cannot-find-libhdfs-so
+
+>>>train.py
+python3 train.py --input_train_path="/home/pi/mediapipe/Output_Data/Landmark/"
+
+#https://github.com/PINTO0309/Tensorflow-bin/#usage
+>>>predict.py
+python3 predict.py --input_data_path='/home/pi/tf_pi/Translating/' --output_data_path='/home/pi/tf_pi/Translated/'
+
 >>>check cpu temperature
 vcgencmd measure_temp
 
