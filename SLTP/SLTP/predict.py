@@ -38,15 +38,20 @@ def load_data(dirname):
             with open(textname, mode = 'r') as t:
                 numbers = [float(num) for num in t.read().split()]
                 #print(len(numbers[0]))
-                for i in range(len(numbers),25200):
-                    numbers.extend([0.000]) #300 frame 고정
+                while (len(numbers) > 45000):
+                    del numbers[len(numbers)-1]
+                for i in range(len(numbers),45000):
+                    numbers.extend([0.000])
             landmark_frame=[]
+            '''
             row=0
             for i in range(0,70):#총 100프레임으로 고정
                 landmark_frame.extend(numbers[row:row+84])
                 row += 84
+            '''
+            landmark_frame.extend(numbers)
             landmark_frame=np.array(landmark_frame)
-            landmark_frame=landmark_frame.reshape(-1,84)#2차원으로 변환(260*42)
+            #landmark_frame=landmark_frame.reshape(-1,84)#2차원으로 변환(260*42)
             X.append(np.array(landmark_frame))
             Y.append(wordname)
     X=np.array(X)
