@@ -27,6 +27,8 @@ def load_data(dirname):
     for file in listfile:
         if "_" in file:
             continue
+        if "." in file:
+            continue
         wordname=file
         textlist=os.listdir(dirname+wordname)
         for text in textlist:
@@ -77,7 +79,8 @@ def load_label():
     return label
     
 def main(input_data_path,output_data_path):
-    comp=comp='bazel build -c opt --copt -DMESA_EGL_NO_X11_HEADERS --copt -DEGL_NO_X11   mediapipe/examples/desktop/multi_hand_tracking:multi_hand_tracking_gpu'
+    
+    #comp=comp='bazel build -c opt --copt -DMESA_EGL_NO_X11_HEADERS --copt -DEGL_NO_X11   mediapipe/examples/desktop/multi_hand_tracking:multi_hand_tracking_gpu'
     #명령어 컴파일
     cmd='GLOG_logtostderr=1 /home/pi/mediapipe/bazel-bin/mediapipe/examples/desktop/multi_hand_tracking/multi_hand_tracking_gpu   --calculator_graph_config_file=/home/pi/mediapipe/mediapipe/graphs/hand_tracking/multi_hand_tracking_desktop_live.pbtxt'
     #미디어 파이프 명령어 저장
@@ -94,7 +97,7 @@ def main(input_data_path,output_data_path):
             os.mkdir(output_data_path+"_"+word)
         if not(os.path.isdir(output_data_path+word)):
             os.mkdir(output_data_path+word)
-        os.system(comp)
+        #os.system(comp)
         outputfilelist=os.listdir(output_data_path+'_'+word)
         for mp4list in fullfilename:
             if ".DS_Store" in mp4list:
@@ -106,7 +109,8 @@ def main(input_data_path,output_data_path):
             os.system(cmdret)
     #mediapipe동작 작동 종료:
     output_dir=output_data_path
-    x_test,Y=load_data(output_dir)
+    
+    x_test,Y=load_data(output_data_path) #output_dir
     new_model = tf.keras.models.load_model('model.h5')
     #new_model.summary()
 
@@ -116,16 +120,17 @@ def main(input_data_path,output_data_path):
 
     xhat = x_test
     yhat = new_model.predict(xhat)
-    print(yhat[1])
+    #print(yhat[0])
     predictions = np.array([np.argmax(pred) for pred in yhat])
     rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
     s=0
     filel=np.array(filel)
     txtpath=output_data_path+"result.txt" 
     with open(txtpath, "w") as f:
+        f.seek(0)
         for i in predictions:
-            f.write(Y[s])
-            f.write(" ")
+            #f.write(Y[s])
+            #f.write(" ")
             f.write(rev_labels[i])
             f.write("\n")
             s+=1

@@ -23,6 +23,7 @@ sudo sh -c 'cat /dev/null > /var/log/messages'	#delete log
 
 #install tensorflow & keras
 https://raspberrypi.stackexchange.com/questions/107483/error-installing-tensorflow-cannot-find-libhdfs-so
+https://qengineering.eu/install-tensorflow-2-lite-on-raspberry-pi-4.html
 
 >>>train.py
 python3 train.py --input_train_path="/home/pi/mediapipe/Output_Data/Landmark/"
@@ -30,6 +31,9 @@ python3 train.py --input_train_path="/home/pi/mediapipe/Output_Data/Landmark/"
 #https://github.com/PINTO0309/Tensorflow-bin/#usage
 >>>predict.py
 python3 predict.py --input_data_path='/home/pi/tf_pi/Translating/' --output_data_path='/home/pi/tf_pi/Translated/'
+
+>>>start.py
+python3 start.py
 
 >>>check cpu temperature
 vcgencmd measure_temp
