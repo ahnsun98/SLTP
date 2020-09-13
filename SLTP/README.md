@@ -1,7 +1,7 @@
 # SLTP
 Sign Language Translation Program - 수화번역프로그램
 
-> development environment
+- development environment
 Raspberry Pi 4
 Raspbian GNU/Linux 10
 Bazel 2.0.0
